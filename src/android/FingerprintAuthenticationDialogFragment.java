@@ -91,7 +91,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         } catch (NotFoundException e) {
             Log.d(TAG, "NotFoundException: " + e);
 
-            getDialog().setTitle("");
+            // getDialog().setTitle("");
         }
 
 
