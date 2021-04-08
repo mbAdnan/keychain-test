@@ -84,7 +84,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         Log.d(TAG, "dialogMode: " + dialogMode);
 
         int fingerprint_auth_dialog_title_id = getResources()
-                .getIdentifier("fingerprint_auth_dialog_title", "string",
+                .getIdentifier("fingerprint_auth_dialog_titler", "string",
                         FingerprintAuth.packageName);
         Log.d(TAG, "fingerprint_auth_dialog_title_id: " + fingerprint_auth_dialog_title_id);
 
