@@ -34,7 +34,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.content.res.Resources.NotFoundException;
 
 import org.apache.cordova.CordovaInterface;
 
@@ -83,40 +82,19 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         int dialogMode = args.getInt("dialogMode");
         String message = args.getString("dialogMessage");
         Log.d(TAG, "dialogMode: " + dialogMode);
-    
-    View v = null;
-        try {
-            int fingerprint_auth_dialog_title_id = getResources()
+
+        int fingerprint_auth_dialog_title_id = getResources()
                 .getIdentifier("fingerprint_auth_dialog_title", "string",
                         FingerprintAuth.packageName);
-            Log.d(TAG, "fingerprint_auth_dialog_title_id: " + fingerprint_auth_dialog_title_id);
+        getDialog().setTitle(getString(fingerprint_auth_dialog_title_id));
+        int fingerprint_dialog_container_id = getResources()
+                .getIdentifier("fingerprint_dialog_container", "layout",
+                        FingerprintAuth.packageName);
 
-            getDialog().setTitle(getString(0));
-            Log.d(TAG, " getDialog().getTitle: " +  getString(fingerprint_auth_dialog_title_id));
-
-
-            int fingerprint_dialog_container_id = getResources()
-                    .getIdentifier("fingerprint_dialog_container", "layout",
-                            FingerprintAuth.packageName);
-             v = inflater.inflate(fingerprint_dialog_container_id, container, false);
-            int cancel_button_id = getResources()
-                    .getIdentifier("cancel_button", "id", FingerprintAuth.packageName);
-
-
-        } catch (NotFoundException e) {
-
-            Log.d(TAG, "NotFoundException " + e);
-            return v;
-
-        }catch (Exception e) {
-
-            Log.d(TAG, "Exception " + e);
-
-            return v;
-
-        }
-        
-        
+        Log.d(TAG, "fingerprint_auth_dialog_title: " + getString(fingerprint_auth_dialog_title_id));
+        View v = inflater.inflate(fingerprint_dialog_container_id, container, false);
+        int cancel_button_id = getResources()
+                .getIdentifier("cancel_button", "id", FingerprintAuth.packageName);
 
         TextView description =  (TextView) v.findViewById(getResources()
                 .getIdentifier("fingerprint_description", "id", FingerprintAuth.packageName));
