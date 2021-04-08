@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.res.Resources.NotFoundException;
 
 import org.apache.cordova.CordovaInterface;
 
@@ -82,24 +83,32 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         int dialogMode = args.getInt("dialogMode");
         String message = args.getString("dialogMessage");
         Log.d(TAG, "dialogMode: " + dialogMode);
+            
+         try {
+            Log.d(TAG, "fingerprint_auth_dialog_title: " + getString(fingerprint_auth_dialog_title_id));
+            int fingerprint_auth_dialog_title_id = getResources().getIdentifier("fingerprint_auth_dialog_titler", "string", FingerprintAuth.packageName);             
+            getDialog().setTitle(getString(fingerprint_auth_dialog_title_id));
+        } catch (NotFoundException e) {
+            Log.d(TAG, "NotFoundException: " + e);
 
-        int fingerprint_auth_dialog_title_id = getResources()
-                .getIdentifier("fingerprint_auth_dialog_title", "string",
-                        FingerprintAuth.packageName);
-        getDialog().setTitle(getString(fingerprint_auth_dialog_title_id));
-        int fingerprint_dialog_container_id = getResources()
-                .getIdentifier("fingerprint_dialog_container", "layout",
-                        FingerprintAuth.packageName);
+            getDialog().setTitle("");
+        }
 
-        Log.d(TAG, "fingerprint_auth_dialog_title: " + getString(fingerprint_auth_dialog_title_id));
+
+
+        int fingerprint_dialog_container_id = getResources().getIdentifier("fingerprint_dialog_container", "layout",FingerprintAuth.packageName);
+
         View v = inflater.inflate(fingerprint_dialog_container_id, container, false);
-        int cancel_button_id = getResources()
-                .getIdentifier("cancel_button", "id", FingerprintAuth.packageName);
 
-        TextView description =  (TextView) v.findViewById(getResources()
-                .getIdentifier("fingerprint_description", "id", FingerprintAuth.packageName));
+
+        int cancel_button_id = getResources().getIdentifier("cancel_button", "id", FingerprintAuth.packageName);
+
+        TextView description =  (TextView) v.findViewById(getResources().getIdentifier("fingerprint_description", "id", FingerprintAuth.packageName));
+
         description.setText(message);
+
         mCancelButton = (Button) v.findViewById(cancel_button_id);
+
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
