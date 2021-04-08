@@ -105,10 +105,13 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         } catch (NotFoundException e) {
 
             Log.d(TAG, "NotFoundException " + e);
+            return null;
 
         }catch (Exception e) {
 
             Log.d(TAG, "Exception " + e);
+
+            return null;
 
         }
         
