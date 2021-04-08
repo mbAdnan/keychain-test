@@ -89,7 +89,7 @@ public class FingerprintAuthenticationDialogFragment extends DialogFragment
         Log.d(TAG, "fingerprint_auth_dialog_title_id: " + fingerprint_auth_dialog_title_id);
 
         getDialog().setTitle(getString(fingerprint_auth_dialog_title_id));
-        Log.d(TAG, " getDialog().getTitle: " +  getDialog().getTitle());
+        Log.d(TAG, " getDialog().getTitle: " +  getString(fingerprint_auth_dialog_title_id));
 
 
         int fingerprint_dialog_container_id = getResources()
